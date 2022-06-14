@@ -48,4 +48,4 @@ module.exports = {
 };
 
 // (async () => await updateOrderDetail("111-1155935-7028218", "6"))();
-(async () => await updateOrders(90))();
+// (async () => await updateOrders(90))();
