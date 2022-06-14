@@ -19,6 +19,9 @@ const envVarsSchema = Joi.object({
     .description('JWT Secret required to sign'),
   MONGO_HOST: Joi.string().required().description('Mongo DB host url'),
   MONGO_PORT: Joi.number().default(27017),
+  GPLUS_API_HOST: Joi.string().required().description('GPlus ERP API Host Url'),
+  GPLUS_API_APPID: Joi.string().required().description('GPlus ERP API AppId'),
+  GPLUS_API_APPKEY: Joi.string().required().description('GPlus ERP API AppKey'),
 })
   .unknown()
   .required();
@@ -38,6 +41,10 @@ const config = {
     host: envVars.MONGO_HOST,
     port: envVars.MONGO_PORT,
   },
+  jobTypes: envVars.JOB_TYPES || [],
+  gplusApiHost: envVars.GPLUS_API_HOST,
+  gplusApiAppId: envVars.GPLUS_API_APPID,
+  gplusApiAppKey: envVars.GPLUS_API_APPKEY,
 };
 
 module.exports = config;
