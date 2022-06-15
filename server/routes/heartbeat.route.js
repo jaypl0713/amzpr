@@ -4,4 +4,6 @@ const cronjobCtrl = require('../controllers/cronjob.controller');
 const router = express.Router();
 module.exports = router;
 
-router.get('/', (req, res) => cronjobCtrl.cronjob());
+router.get('/', (req, res) =>
+  cronjobCtrl.cronjob().then(() => res.send('job started.'))
+);

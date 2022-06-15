@@ -2,9 +2,11 @@ const moment = require('moment');
 const { apiRequest } = require('./apiRequest');
 const orderCtrl = require('../../controllers/order.controller');
 
-const updateOrders = async days => {
+const updateOrdersLast = async (time, timeUnit) => {
   const endpoint = '/api/v2/channel/order';
-  let startDay = moment().subtract(days, 'days').format('YYYY-MM-DD hh:mm:ss');
+  let startDay = moment()
+    .subtract(time, timeUnit)
+    .format('YYYY-MM-DD hh:mm:ss');
   let endDay = moment().format('YYYY-MM-DD hh:mm:ss');
   const query = {
     page: 1,
@@ -43,9 +45,9 @@ const updateOrderDetail = async (orderId, marketId) => {
 };
 
 module.exports = {
-  updateOrders,
+  updateOrdersLast,
   updateOrderDetail,
 };
 
 // (async () => await updateOrderDetail("111-1155935-7028218", "6"))();
-// (async () => await updateOrders(90))();
+(async () => await updateOrdersLast(90, 'Days'))();
