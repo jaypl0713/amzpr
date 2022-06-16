@@ -29,7 +29,7 @@ const updateProducts = async () => {
   } while (query.page <= totalPages);
 };
 
-(async () => await updateProducts())();
+// (async () => await updateProducts())();
 module.exports = {
   updateProducts,
 };

@@ -31,7 +31,7 @@ const updateMarkets = async () => {
   } while (query.page <= totalPages);
 };
 
-(async () => await updateMarkets())();
+// (async () => await updateMarkets())();
 module.exports = {
   updateMarkets,
 };

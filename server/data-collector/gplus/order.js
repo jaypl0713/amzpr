@@ -50,4 +50,4 @@ module.exports = {
 };
 
 // (async () => await updateOrderDetail("111-1155935-7028218", "6"))();
-(async () => await updateOrdersLast(90, 'Days'))();
+// (async () => await updateOrdersLast(90, 'Days'))();
