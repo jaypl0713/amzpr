@@ -1,19 +1,12 @@
-const order = require('../data-collector/gplus/order');
+const config = require('../config/config');
+const orderCollector = require('../data-collector/gplus/order');
 
 module.exports = function (agenda) {
+  const offset = config.timezoneOffset;
   agenda.define('update orders last 24 hours', async job => {
-    await order.updateOrdersLast(24, 'hours');
+    orderCollector.updateHistoryOrdersByHours(24, offset);
   });
   agenda.define('update orders last 12 hours', async job => {
-    await order.updateOrdersLast(12, 'hours');
+    orderCollector.updateHistoryOrdersByHours(12, offset);
   });
-  agenda.define('update orders last 4 hours', async job => {
-    await order.updateOrdersLast(4, 'hours');
-  });
-  agenda.define('update orders last 1 hour', async job => {
-    await order.updateOrdersLast(1, 'hours');
-  });
-  // agenda.define("update order detail", async(job) => {
-  //   await order.updateOrderDetail("112-7281712-1043444", "1");
-  // });
 };

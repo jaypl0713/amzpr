@@ -22,6 +22,10 @@ const envVarsSchema = Joi.object({
   GPLUS_API_HOST: Joi.string().required().description('GPlus ERP API Host Url'),
   GPLUS_API_APPID: Joi.string().required().description('GPlus ERP API AppId'),
   GPLUS_API_APPKEY: Joi.string().required().description('GPlus ERP API AppKey'),
+  TIMEZONE_OFFSET: Joi.number()
+    .required()
+    .default(10)
+    .description('Server location timezone offset'),
 })
   .unknown()
   .required();
@@ -45,6 +49,7 @@ const config = {
   gplusApiHost: envVars.GPLUS_API_HOST,
   gplusApiAppId: envVars.GPLUS_API_APPID,
   gplusApiAppKey: envVars.GPLUS_API_APPKEY,
+  timezoneOffset: envVars.TIMEZONE_OFFSET,
 };
 
 module.exports = config;

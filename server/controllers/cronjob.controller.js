@@ -4,7 +4,7 @@ async function cronjob() {
   agenda.every('8 hours', 'update markets');
   agenda.every('8 hours', 'update listings');
   agenda.every('8 hours', 'update products');
-  agenda.every('50 minutes', 'update orders last 1 hour');
+  agenda.every('12 hours', 'update orders last 24 hours');
 }
 
 module.exports = {

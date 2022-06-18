@@ -2,17 +2,13 @@ const moment = require('moment');
 const { apiRequest } = require('./apiRequest');
 const orderCtrl = require('../../controllers/order.controller');
 
-const updateOrdersLast = async (time, timeUnit) => {
+const updateOrdersLast = async (lastUpdateStartDate, lastUpdateEndDate) => {
   const endpoint = '/api/v2/channel/order';
-  let startDay = moment()
-    .subtract(time, timeUnit)
-    .format('YYYY-MM-DD hh:mm:ss');
-  let endDay = moment().format('YYYY-MM-DD hh:mm:ss');
   const query = {
     page: 1,
     pagesize: 500,
-    lastUpdateStartDate: startDay,
-    lastUpdateEndDate: endDay,
+    lastUpdateStartDate: lastUpdateStartDate,
+    lastUpdateEndDate: lastUpdateEndDate,
   };
   let totalPages = 1;
   do {
@@ -23,8 +19,8 @@ const updateOrdersLast = async (time, timeUnit) => {
       totalPages = Math.ceil(orderCount / query.pagesize);
       console.log(orderCount);
       console.log(query.page);
-      orders.forEach(element => {
-        orderCtrl.updateOrInsert(element);
+      orders.forEach(async element => {
+        await orderCtrl.updateOrInsert(element);
       });
       query.page = query.page + 1;
     } else {
@@ -47,7 +43,26 @@ const updateOrderDetail = async (orderId, marketId) => {
 module.exports = {
   updateOrdersLast,
   updateOrderDetail,
+  updateHistoryOrdersByDay,
+  updateHistoryOrdersByHours,
 };
+
+async function updateHistoryOrdersByDay(
+  lastUpdateStartDate,
+  lastUpdateEndDate
+) {
+  updateOrdersLast(lastUpdateStartDate, lastUpdateEndDate);
+}
+
+async function updateHistoryOrdersByHours(hours, offset = 0) {
+  let startDate = moment()
+    .subtract(offset + hours, 'hours')
+    .format('YYYY-MM-DD hh:mm:ss');
+  let endDate = moment()
+    .subtract(offset, 'hours')
+    .format('YYYY-MM-DD hh:mm:ss');
+  updateOrdersLast(startDate, endDate);
+}
 
 // (async () => await updateOrderDetail("111-1155935-7028218", "6"))();
 // (async () => await updateOrdersLast(90, 'Days'))();
