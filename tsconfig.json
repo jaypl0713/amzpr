@@ -2,18 +2,11 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@app/*": [
-        "src/app/*"
-      ]
+      "@app/*": ["src/app/*"]
     },
     "target": "ES2015",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["ESNext", "DOM"],
     "module": "es2020",
     "moduleResolution": "node",
     "strict": true,
@@ -22,5 +15,8 @@
     "importHelpers": true,
     "experimentalDecorators": true,
     "suppressImplicitAnyIndexErrors": true
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true
   }
 }

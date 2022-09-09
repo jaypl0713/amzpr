@@ -8,4 +8,4 @@ router.get('/cronjob/start', (req, res) =>
   cronjobCtrl.cronjob().then(() => res.send('job started.'))
 );
 
-router.get('/histroy-order', (req, res) => res.send('Nothing happened yet.'));
+router.get('/history-order', (req, res) => res.send('Nothing happened yet.'));
